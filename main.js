@@ -47,7 +47,6 @@ let list =  document.querySelector('.girl-row')
 
 // hien thi danh sach 
 
-
 data.forEach(function renderList(item){
    let {id, name, image, price, size} = item;
    let li = document.createElement("li");
@@ -66,15 +65,15 @@ data.forEach(function renderList(item){
                                     <span class="sizeL">L</span>
                                 </div>
                                 <div>
-                                    <button>Đặt Hàng</button>
+                                    <button class ="btn-premium">Đặt Hàng</button>
                                 </div>
                             </div>
 
                         </div>
-  `
-  li.addEventListener('click',function InfomationItem(){
-   renderCart(item)  
-})
+  ` 
+  li.querySelector(".btn-premium").addEventListener('click',function(){
+    renderCart(item)
+  })
 list.appendChild(li);
 })
 
@@ -86,18 +85,7 @@ list.appendChild(li);
     let showCart = document.querySelector(".main_infomation_show")
     let div_card = document.createElement("div")
     div_card.classList.add("card_container")
-    const priceCart = document.querySelectorAll('.card_container');
-    for(let item of priceCart){
-        let productN =  item.querySelector(".infomation_card h3")
-        console.log(productN.innerHTML)
-        if(productN.innerHTML == name){
-            alert("San pham da co trong cua hang")
-            let Card_input =  document.querySelector(".Input_card")
-            Card_input.value = parseInt(Card_input.value) + 1
-            return
-        }
-    }
-   
+    div_card.innerHTML = ``
     div_card.innerHTML=`
     <div class="d-f b-d">
                     <div class="image_card" style="background-image: url(${image});"></div>
@@ -117,24 +105,37 @@ list.appendChild(li);
                         </div>
      </div>     
     `
-   
+    const priceCart = document.querySelectorAll('.card_container');
+    console.log(priceCart)
+    for(let item of priceCart){
+        let productN =  item.querySelector(".infomation_card h3")
+        if(productN.innerHTML == name){
+            alert("San pham da co trong cua hang")
+            return
+        }
+    }
+    const cart = document.querySelector(".total span")
+    
+    cart.innerHTML = `${price}`
     showCart.appendChild(div_card)
 
-    totalProduct()
+    changePrice(div_card)
 
     totalPrice(priceCart)
+    
+   
 
-    deleteCard(div_card)
+    // deleteCard(div_card)
 }
 
 
 // tang giam so luong san pham
 
 
-function totalProduct(){
-    let Card_minus = document.querySelector(".minus")
-    let Card_total = document.querySelector(".total")
-    let Card_input =  document.querySelector(".Input_card")
+function changePrice(div_card){
+    let Card_minus = div_card.querySelector(".minus")
+    let Card_total = div_card.querySelector(".total")
+    let Card_input =  div_card.querySelector(".Input_card")
 
     Card_minus.addEventListener('click',function(){
         if(Card_input.value >= 1) {
@@ -158,15 +159,16 @@ function totalProduct(){
 
 function totalPrice(priceCart) {
     let productPrice = 0;
-    for (let item of priceCart) {     
+    for (let item of priceCart) {    
         const value_Input = item.querySelector('.Input_card').value
         const value_Price = item.querySelector('.Totalprice').innerHTML
-        totalProduct = value_Input * value_Price;
-        productPrice += totalProduct;
+        tProduct = value_Input * value_Price;
+        productPrice += tProduct;
     }
     const cart = document.querySelector(".total span")
     cart.innerHTML = productPrice.toLocaleString();
  }
+ 
 //  function deleteCard(div_card) {
 //     const remove = div_card.querySelector('.del')
     
