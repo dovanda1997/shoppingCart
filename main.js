@@ -60,9 +60,9 @@ data.forEach(function renderList(item){
                             </div>
                             <p>Lorem ipsum dolor sit amet consectetur.</p>
                             <div class="flex">
-                                <div >
-                                    <span class="sizeM active">M</span>
-                                    <span class="sizeL">L</span>
+                                <div class ="btnS">
+                                    <span class="  sizeM active">M</span>
+                                    <span class="  sizeL">L</span>
                                 </div>
                                 <div>
                                     <button class ="btn-premium">Đặt Hàng</button>
@@ -73,9 +73,18 @@ data.forEach(function renderList(item){
   ` 
   li.querySelector(".btn-premium").addEventListener('click',function(){
     renderCart(item)
+    const priceCart = document.querySelectorAll('.card_container');
+    totalPrice(priceCart)
   })
 list.appendChild(li);
+
 })
+
+
+// chon size cho san pham
+
+
+
 
 // hien thi thong tin cart san pham
 
@@ -109,8 +118,9 @@ list.appendChild(li);
     console.log(priceCart)
     for(let item of priceCart){
         let productN =  item.querySelector(".infomation_card h3")
+        let coutInput = item.querySelector(".Input_card")
         if(productN.innerHTML == name){
-            alert("San pham da co trong cua hang")
+            coutInput.value = parseInt(coutInput.value) + 1
             return
         }
     }
@@ -122,10 +132,8 @@ list.appendChild(li);
     changePrice(div_card)
 
     totalPrice(priceCart)
-    
-   
 
-    // deleteCard(div_card)
+    deleteCard(div_card)
 }
 
 
@@ -168,15 +176,20 @@ function totalPrice(priceCart) {
     const cart = document.querySelector(".total span")
     cart.innerHTML = productPrice.toLocaleString();
  }
+
+
+//  xoa bo san pham
  
-//  function deleteCard(div_card) {
-//     const remove = div_card.querySelector('.del')
-    
-//     remove.addEventListener('click', () => { 
-//         div_card.remove()
-//         totalPrice(document.querySelectorAll('.card_container'))
-//     })
-// }
+
+
+ function deleteCard(div_card) {
+    const remove = div_card.querySelector('.del') 
+    remove.addEventListener('click', () => { 
+        div_card.remove()
+        totalPrice(document.querySelectorAll('.card_container'))
+    })
+}
+
 
 
 
