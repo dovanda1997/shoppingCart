@@ -60,9 +60,9 @@ data.forEach(function renderList(item){
                             </div>
                             <p>Lorem ipsum dolor sit amet consectetur.</p>
                             <div class="flex">
-                                <div class ="btnS">
-                                    <span class="  sizeM active">M</span>
-                                    <span class="  sizeL">L</span>
+                                <div>
+                                    <button class="btnS sizeM active">M</button>
+                                    <button class="btnS sizeL">L</button>
                                 </div>
                                 <div>
                                     <button class ="btn-premium">Đặt Hàng</button>
@@ -74,16 +74,34 @@ data.forEach(function renderList(item){
   li.querySelector(".btn-premium").addEventListener('click',function(){
     renderCart(item)
     const priceCart = document.querySelectorAll('.card_container');
-    totalPrice(priceCart)
+    totalPrice(priceCart) 
   })
+  li.querySelectorAll('button.sizeM').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+        li.querySelector('button.active').classList.remove('active');
+       let a =  li.querySelector('span')
+       
+      
+        e.target.classList.add('active');
+    })
+  })
+  li.querySelectorAll('button.sizeL').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+        li.querySelector('button.active').classList.remove('active');
+        e.target.classList.add('active');
+    })
+  })
+
+
+
 list.appendChild(li);
+
 
 })
 
 
 // chon size cho san pham
-
-
+  
 
 
 // hien thi thong tin cart san pham
