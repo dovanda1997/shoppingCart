@@ -56,7 +56,7 @@ data.forEach(function renderList(item){
                         <div class="food-item_product">
                             <div class="flex">
                                 <h3>${name}</h3>
-                                <span class="f-w price">${price}</span>
+                                <span class="f-w price">${size.m}</span>
                             </div>
                             <p>Lorem ipsum dolor sit amet consectetur.</p>
                             <div class="flex">
@@ -78,15 +78,20 @@ data.forEach(function renderList(item){
   })
   li.querySelectorAll('button.sizeM').forEach(function(item) {
     item.addEventListener('click', function(e) {
+      let m =  li.querySelector('.price')
+      sM = size.m
+      m.innerHTML = sM
         li.querySelector('button.active').classList.remove('active');
-       let a =  li.querySelector('span')
-       
-      
         e.target.classList.add('active');
     })
-  })
-  li.querySelectorAll('button.sizeL').forEach(function(item) {
+})
+li.querySelectorAll('button.sizeL').forEach(function(item) {
     item.addEventListener('click', function(e) {
+        let l =  li.querySelector('.price')
+        sL = size.l
+        l.innerHTML = sL
+        console.log(sL)
+        let a =  li.querySelector('span') 
         li.querySelector('button.active').classList.remove('active');
         e.target.classList.add('active');
     })
@@ -125,7 +130,7 @@ list.appendChild(li);
                                 <button class = " btn total">+</button> 
                                </div>
                                 <div class = "d-f">
-                                        <p class=" Totalprice m-l f-w">${price}</p> 
+                                        <p class=" Totalprice m-l f-w">${size.m}</p> 
                                         <button class = "btn del">X</button>
                                 </div>      
                             </div>  
