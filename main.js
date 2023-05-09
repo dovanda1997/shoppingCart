@@ -71,8 +71,12 @@ data.forEach(function renderList(item){
 
                         </div>
   ` 
-  li.querySelector(".btn-premium").addEventListener('click',function(){
-    renderCart(item)
+  
+  li.querySelector(".btn-premium").addEventListener('click',function(){  
+    let itemS = item.size.m
+    let imgC = item.image
+    let itemN = item.name
+    renderCart(itemS, imgC, itemN)
     const priceCart = document.querySelectorAll('.card_container');
     totalPrice(priceCart) 
   })
@@ -83,6 +87,8 @@ data.forEach(function renderList(item){
       m.innerHTML = sM
         li.querySelector('button.active').classList.remove('active');
         e.target.classList.add('active');
+        
+        
     })
 })
 li.querySelectorAll('button.sizeL').forEach(function(item) {
@@ -90,13 +96,11 @@ li.querySelectorAll('button.sizeL').forEach(function(item) {
         let l =  li.querySelector('.price')
         sL = size.l
         l.innerHTML = sL
-        console.log(sL)
         let a =  li.querySelector('span') 
         li.querySelector('button.active').classList.remove('active');
         e.target.classList.add('active');
     })
   })
-
 
 
 list.appendChild(li);
@@ -112,17 +116,19 @@ list.appendChild(li);
 // hien thi thong tin cart san pham
 
 
- function renderCart(item){
-    let {id, name, image, price, size} = item;
+
+
+ function renderCart(itemS, imgC, itemN){
+    // let {id, name, image, price, size} = item;
     let showCart = document.querySelector(".main_infomation_show")
     let div_card = document.createElement("div")
     div_card.classList.add("card_container")
     div_card.innerHTML = ``
     div_card.innerHTML=`
     <div class="d-f b-d">
-                    <div class="image_card" style="background-image: url(${image});"></div>
+                    <div class="image_card" style="background-image: url(${imgC});"></div>
                         <div class="infomation_card m-l">                          
-                            <h3>${name}</h3>                           
+                            <h3>${itemN}</h3>                           
                             <div class="card_cout d-f m-t">
                                <div>
                                 <button class= "btn minus">-</button>
@@ -130,7 +136,7 @@ list.appendChild(li);
                                 <button class = " btn total">+</button> 
                                </div>
                                 <div class = "d-f">
-                                        <p class=" Totalprice m-l f-w">${size.m}</p> 
+                                        <p class="Totalprice m-l f-w">${itemS}</p> 
                                         <button class = "btn del">X</button>
                                 </div>      
                             </div>  
@@ -142,14 +148,15 @@ list.appendChild(li);
     for(let item of priceCart){
         let productN =  item.querySelector(".infomation_card h3")
         let coutInput = item.querySelector(".Input_card")
-        if(productN.innerHTML == name){
+        if(productN.innerHTML == itemN){
             coutInput.value = parseInt(coutInput.value) + 1
             return
         }
     }
     const cart = document.querySelector(".total span")
     
-    cart.innerHTML = `${price}`
+    cart.innerHTML = `${itemS}` 
+    // cart.innerHTML = `${price}` 
     showCart.appendChild(div_card)
 
     changePrice(div_card)
